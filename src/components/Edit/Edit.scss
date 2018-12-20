@@ -1,0 +1,65 @@
+.edit-wrapper {
+  padding: 20px 0 50px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.edit-tool {
+
+}
+
+.edit-content {
+  margin: 0 auto;
+  padding: 10px 40px;
+  box-sizing: border-box;
+  max-width: 770px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px hsla(0, 0%, 45.1%, .08);
+}
+
+.content-header {
+  width: 100%;
+  border: none;
+}
+
+.content-header {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.content-text {
+  padding: 30px 0;
+  box-sizing: border-box;
+
+  .text-area {
+    display: block;
+    min-height: 900px;
+    width: 100%;
+    line-height: 24px;
+    font-size: 14px;
+    letter-spacing: .05em;
+    border: none;
+    outline: none;
+    color: black;
+    resize: none;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+.content-header > input {
+  padding: 50px 0;
+  width: 100%;
+  border: none;
+  letter-spacing: .05em;
+  outline: none;
+  font-size: 36px;
+}
+
+
+.cc {
+  color: red;;
+}

@@ -1,0 +1,53 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #222;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+}
+
+.App-header .logo {
+  line-height: 30px;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tool {
+  height: 40px;
+  border: 1px solid #e8e8e8;
+}
+
+.select-time {
+  margin: 3px;
+}
+
+.ant-input:focus {
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-right-width: 1px !important;
+}
