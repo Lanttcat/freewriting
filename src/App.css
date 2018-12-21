@@ -35,19 +35,20 @@
   }
 }
 
-.tool {
-  height: 40px;
-  border: 1px solid #e8e8e8;
-}
-
-.select-time {
-  margin: 3px;
-}
-
 .ant-input:focus {
   border: none;
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-right-width: 1px !important;
+}
+
+.header-option {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.option-status {
+  line-height: 30px;
 }

@@ -9,24 +9,66 @@ import styles from './Edit.scss';
 const {TextArea} = Input;
 const cx = classNames.bind(styles);
 
-interface IOwnStates {
-  editValue: string,
+interface IOwnProps {
+  limitTime: {
+    isOpen: boolean,
+    time: number,
+  }
 }
 
-class Edit extends React.Component<{}, IOwnStates> {
-  constructor(props: {}) {
+interface IOwnStates {
+  editValue: string,
+  lastEditValue: string,
+  timer: any,
+  status: Status,
+}
+
+enum Status {
+  STOP = 'stop',
+  WRITING = 'writing',
+}
+
+class Edit extends React.Component<IOwnProps, IOwnStates> {
+
+  constructor(props: IOwnProps) {
     super(props);
     this.state = {
       editValue: '',
+      lastEditValue: '',
+      status: Status.STOP,
+      timer: null,
     }
   }
 
-  public handleUserInput = (event: object) => {
-    // @ts-ignore
-    this.setState({editValue: event.target.value});
+  public timerCompute = (newValue: string) => {
+    const {limitTime} = this.props;
+    const {timer} = this.state;
+    clearTimeout(timer);
+    const tempTimer = setTimeout(() => {
+      this.setState({editValue: ''});
+    }, limitTime.time);
+    this.setState({
+      lastEditValue: newValue,
+      timer: tempTimer
+    });
   };
+
+  public handleUserInput = (event: object) => {
+    const {limitTime} = this.props;
+    // @ts-ignore
+    const tempInputValue = event.target.model;
+    if (limitTime.isOpen) {
+      this.timerCompute(tempInputValue)
+    }
+    this.setState({editValue: tempInputValue});
+  };
+
+  public startWrite = () => {
+    this.setState({status: Status.WRITING});
+  };
+
   public render() {
-    const {editValue} = this.state;
+    const {editValue, status} = this.state;
     return (
       <div className={cx('edit-wrapper')}>
         <div className={cx('edit-content')}>
@@ -34,12 +76,20 @@ class Edit extends React.Component<{}, IOwnStates> {
             <Input placeholder="Basic usage"/>
           </div>
           <div className={cx('content-text')}>
-                <TextArea
-                  className={cx('text-area')}
-                  value={editValue}
-                  onChange={this.handleUserInput}
-                />
+            <TextArea
+              className={cx('text-area')}
+              value={editValue}
+              onChange={this.handleUserInput}
+            />
           </div>
+          {
+            status === Status.STOP &&
+            <div className={cx('start-wrapper')}>
+              <span onClick={this.startWrite}>
+                Start
+              </span>
+            </div>
+          }
         </div>
       </div>
     );

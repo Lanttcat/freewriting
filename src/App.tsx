@@ -1,18 +1,18 @@
-import {Button, Select} from 'antd';
+import {Button, Popover} from 'antd';
+// @ts-ignore
 import * as React from 'react';
 import Edit from './components/Edit';
+import Tools from './components/Tools';
+
+// @ts-ignore
 
 import './App.css';
-
-const Option = Select.Option;
 
 interface IOwnStates {
   editValue: string,
 }
 
 class App extends React.Component<{}, IOwnStates> {
-
-
 
   public render() {
     return (
@@ -21,25 +21,17 @@ class App extends React.Component<{}, IOwnStates> {
           <div className={'logo'}>
             <span>自由写作</span>
           </div>
-          <div>
-            <Button htmlType={'button'}>Default</Button>
+          <div className={"header-option"}>
+            <div className={'option-status'}>当前模式</div>
+            <Popover placement="bottomRight" title={'自由'} content={<Tools/>} trigger="click">
+              <Button htmlType={'button'}>模式设置</Button>
+            </Popover>
           </div>
         </header>
         <div>
-          <div className={'tool'}>
-            <Select
-              className={'select-time'}
-              style={{ width: 200 }}
-              placeholder="Select a person"
-              optionFilterProp="children"
-            >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="tom">Tom</Option>
-            </Select>
-          </div>
-          <Edit/>
-
+          <Edit
+            limitTime={{isOpen: true, time: 5000}}
+          />
         </div>
 
       </div>
