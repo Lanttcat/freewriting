@@ -1,30 +1,28 @@
-// @ts-ignore
 import * as React from 'react';
-import Edit from './components/Edit';
-import Header from './components/Header';
+import routes from './route';
 
-// @ts-ignore
-
+import {ConnectedRouter} from 'connected-react-router';
+import {History} from 'history';
 import './App.css';
 
-interface IOwnStates {
-  editValue: string,
+interface IAppProps {
+  history: History;
 }
 
-class App extends React.Component<{}, IOwnStates> {
-
-  public render() {
-    return (
-      <div className="App">
-        <Header />
-        <div>
-          <Edit
-            limitTime={{isOpen: true, time: 5000}}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+const App = ({history}: IAppProps) => {
+  return (
+    <ConnectedRouter history={history}>
+      {routes}
+      {/*<div className="App">*/}
+        {/*<Header/>*/}
+        {/*<div>*/}
+          {/*<Edit*/}
+            {/*limitTime={{isOpen: true, time: 5000}}*/}
+          {/*/>*/}
+        {/*</div>*/}
+      {/*</div>*/}
+    </ConnectedRouter>
+  );
+};
 
 export default App;

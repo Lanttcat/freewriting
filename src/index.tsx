@@ -1,16 +1,15 @@
-import { ConnectedRouter } from 'connected-react-router'
+import {routerMiddleware} from 'connected-react-router';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from "react-redux"
+import {AppContainer} from 'react-hot-loader';
+import {Provider} from "react-redux"
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-
-import { routerMiddleware } from 'connected-react-router'
-import { createBrowserHistory } from 'history';
-import { applyMiddleware, compose, createStore } from 'redux'
+import {createBrowserHistory} from 'history';
+import {applyMiddleware, compose, createStore} from 'redux'
+import App from './App'
 import createRootReducer from './reducers/reducers';
-import routes from './route';
 
 const history = createBrowserHistory();
 
@@ -26,13 +25,14 @@ const store = createStore(
   ),
 );
 
-
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
-      { routes }
-    </ConnectedRouter>
-  </Provider>,
+  (
+    <AppContainer>
+      <Provider store={store}>
+        <App history={history}/>
+      </Provider>
+    </AppContainer>
+  ),
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
