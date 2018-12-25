@@ -1,3 +1,23 @@
 .home-wrapper {
-  min-height: 600px;
+  display: flex;
+  margin: 24px auto;
+  padding: 24px;
+  min-width: 1024px;
+  max-width: 1300px;
+  min-height: calc(100vh - 114px);
+
+  .home-left-wrapper {
+    flex-grow: 1;
+    min-width: 250px;
+  }
+
+  .home-content-wrapper {
+    margin: 0 24px;
+    flex-grow: 5;
+  }
+
+  .home-right-wrapper {
+    flex-grow: 1;
+    min-width: 250px;
+  }
 }

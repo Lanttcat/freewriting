@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import CreateNew from './components/Edit'
-import Home from './components/Home';
+import Home from './containers/HomeContainer';
 import Header from './components/Header';
 
 const routes = (
