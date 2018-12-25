@@ -20,10 +20,15 @@ class Home extends React.Component<IOwnProps, {}>{
       <div className={cx('home-wrapper')}>
         <div className={cx('home-left-wrapper')}>left</div>
         <div className={cx('home-content-wrapper')}>
-          <h5>动态</h5>
-          <Card/>
+          <div className={cx('create-new')} onClick={this.handleClick}>
+            开始自由写作
+          </div>
+          <div>
+            <h5>动态</h5>
+            <Card/>
+          </div>
         </div>
-        <div className={cx('home-right-wrapper')}>right</div>
+        <div className={cx('home-right-wrapper')}>什么是快速写作</div>
 
       </div>
     );

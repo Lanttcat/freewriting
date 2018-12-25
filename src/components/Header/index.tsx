@@ -1,12 +1,22 @@
 import {Button, Popover} from 'antd';
+import { push } from 'connected-react-router'
 import * as React from 'react';
+import {connect} from "react-redux";
 
 import Tools from '../Tools';
-class Header extends React.Component<{}, {}> {
+interface IOwnProps {
+  push: (url: string) => void;
+}
+class Header extends React.Component<IOwnProps, {}> {
+
+  public handleToHome = () => {
+    this.props.push('/');
+  };
+
   public render(): React.ReactNode {
     return (
       <header className="App-header">
-          <div className={'logo'}>
+          <div className={'logo'} onClick={this.handleToHome}>
             <span>自由写作</span>
           </div>
           <div className={"header-option"}>
@@ -20,4 +30,4 @@ class Header extends React.Component<{}, {}> {
   }
 }
 
-export default Header;
+export default connect(null,  { push })(Header);

@@ -10,8 +10,15 @@ class Card extends React.Component<{}, {}>{
   public render(): React.ReactNode {
     return (
       <div className={cx('card-wrapper')}>
-        <p><span>头像</span><span>用户名</span></p>
-        <p>时间</p>
+        <div>
+          <div>
+            <span>头像</span>
+          </div>
+          <div>
+            <span>用户名</span>
+            <span>时间</span>
+          </div>
+        </div>
         <h3>这实力问题</h3>
         <p>一二三四五六七北京市一二三四五六七北京市一二三四五六七北京市一二三四五六七北京市一二三四五六七北京市一二三四五六七北京市</p>
         <a href="#">链接</a>
