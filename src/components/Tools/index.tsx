@@ -1,8 +1,8 @@
 import {Button, InputNumber, Radio, Select, Tooltip} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
-import * as _ from 'lodash';
 import * as React from 'react';
+import { IGlobalConfig } from '../../type';
 // @ts-ignore
 import styles from './Tools.scss';
 
@@ -11,58 +11,103 @@ const cx = classNames.bind(styles);
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
-class Tools extends React.Component<{}, {}> {
-  public state = {
-    model: 'time',
-  };
+interface IOwnProps {
+  handleConfirm: (config: IGlobalConfig) => void;
+  config: IGlobalConfig;
+}
 
-  public onModelChange = (e: any) => {
-    this.setState({
-      model: e.target.value,
-    });
-  };
+interface IOwnStates {
+  clearTime: number,
+  limitNumber: number,
+  limitTime: number,
+  model: 'number' | 'time',
+}
 
-  public handleSettingSubmit = () => {
-    // 应该提交到服务器
-    _.noop()
+class Tools extends React.Component<IOwnProps, IOwnStates> {
+  constructor(props: IOwnProps) {
+    super(props);
+    const { config } = this.props;
+    this.state = {
+      clearTime: config.clearTime * 1000,
+      limitNumber: config.limitNumber,
+      limitTime: config.limitTime,
+      model: config.model,
+    };
   }
 
+  public setClearTime = (value: number) => {
+    this.setState({ clearTime: value })
+  };
+
+  public setModel = (event: any) => {
+    this.setState({ model: event.target.value});
+  };
+
+  public setLimitTime = (value: number) => {
+    this.setState({ limitTime: value });
+  };
+
+  public setLimitNumber = (value: number) => {
+    this.setState({ limitNumber: value});
+  };
+
+  public handleSettingSubmit = (event: any) => {
+    const { clearTime, limitTime, limitNumber, model } = this.state;
+    // 应该提交到服务器
+    const userConfig: IGlobalConfig = { clearTime, limitNumber, limitTime, model };
+    this.props.handleConfirm(userConfig);
+  };
+
   public render(): React.ReactNode {
-    const {model} = this.state;
+    const {model, clearTime, limitTime, limitNumber} = this.state;
     return (
       <div className={cx('tool')}>
         <div className={cx('option')}>
           <Tooltip placement="bottomRight" title={'选择最长停笔时间'}>
             <Select
+              style={{width: '100%'}}
+              value={clearTime}
               className={cx('select-time')}
-              style={{width: 200}}
-              placeholder="Select a person"
+              placeholder="选择最长停笔时间..."
               optionFilterProp="children"
+              onSelect={this.setClearTime}
             >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="tom">Tom</Option>
+              <Option value={5}>5秒</Option>
+              <Option value={8}>8秒</Option>
+              <Option value={10}>10秒</Option>
             </Select>
           </Tooltip>
         </div>
         <div className={cx('option')}>
-          <RadioGroup onChange={this.onModelChange} value={this.state.model}>
+          <RadioGroup value={model} onChange={this.setModel}>
             <Radio value={'time'}>时间模式</Radio>
             <Radio value={'number'}>字数模式</Radio>
-            <Radio value={'none'}>无限制模式</Radio>
+            {/*<Radio value={'none'}>无限制模式</Radio>*/}
           </RadioGroup>
         </div>
         <div>
           {
             model === 'time' &&
             <div className={cx('option-item')}>
-              <InputNumber min={1} max={10} defaultValue={3}/>
+              <InputNumber
+                value={limitTime}
+                onChange={this.setLimitTime}
+                min={5}
+                max={100}
+                defaultValue={10}/>
+              <span> 分钟</span>
             </div>
           }
           {
             model === 'number' &&
             <div className={cx('option-item')}>
-              <InputNumber min={1} max={10} defaultValue={3}/>
+              <InputNumber
+                value={limitNumber}
+                onChange={this.setLimitNumber}
+                min={400}
+                max={3000}
+                defaultValue={500}/>
+              <span> 字</span>
             </div>
           }
         </div>

@@ -5,12 +5,16 @@ import { setGlobalConfig } from '../actions';
 import Header from '../components/Header';
 import { IGlobalConfig } from '../type';
 
-// interface State {}
-// const mapStateToProps = (state: State) => ({});
+interface IState {
+  configReducer: IGlobalConfig;
+}
+const mapStateToProps = (state: IState) => ({
+  config: state.configReducer,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   push,
   setConfig: (config: IGlobalConfig) => dispatch(setGlobalConfig(config)),
 });
 
-export default connect(null,  mapDispatchToProps)(Header);
+export default connect(mapStateToProps,  mapDispatchToProps)(Header);

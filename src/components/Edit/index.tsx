@@ -3,8 +3,8 @@ import {Input} from 'antd';
 import classNames from 'classnames/bind';
 import * as React from 'react';
 
-// @ts-ignore
-import { IGlobalConfig } from '../type';
+import * as _ from 'lodash';
+import { IGlobalConfig } from '../../type';
 import styles from './Edit.scss';
 
 const {TextArea} = Input;
@@ -12,11 +12,6 @@ const cx = classNames.bind(styles);
 
 interface IOwnProps {
   config: IGlobalConfig;
-  model: 'time' | 'number',
-  limitTime: {
-    isOpen: boolean,
-    time: number,
-  }
 }
 
 interface IOwnStates {
@@ -48,25 +43,21 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   }
 
   public timerCompute = (newValue: string) => {
-    const {limitTime} = this.props;
+    const {clearTime} = this.props.config;
     const {timer} = this.state;
     clearTimeout(timer);
     const tempTimer = setTimeout(() => {
       this.setState({editValue: ''});
-    }, limitTime.time);
+    }, clearTime);
     this.setState({
       lastEditValue: newValue,
       timer: tempTimer
     });
   };
 
-  public handleUserInput = (event: object) => {
-    const {limitTime} = this.props;
-    // @ts-ignore
-    const tempInputValue = event.target.model;
-    if (limitTime.isOpen) {
-      this.timerCompute(tempInputValue)
-    }
+  public handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const tempInputValue = event.target.value;
+    this.timerCompute(tempInputValue);
     this.setState({editValue: tempInputValue});
   };
 
@@ -75,16 +66,16 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   };
 
   public render() {
-    const {editValue, status} = this.state;
+    const {editValue} = this.state;
     return (
       <div className={cx('edit-wrapper')}>
         <div className={cx('edit-notice')}>
-          <span>字数：{editValue.length}</span>
+          <span>字数：{_.size(editValue)}</span>
           <span>时间：111</span>
         </div>
         <div className={cx('edit-content')}>
           <div className={cx('content-header')}>
-            <Input placeholder="Basic usage"/>
+            <Input value={'201111'} placeholder="标题"/>
           </div>
           <div className={cx('content-text')}>
             <TextArea
@@ -93,14 +84,14 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
               onChange={this.handleUserInput}
             />
           </div>
-          {
-            status === Status.STOP &&
-            <div className={cx('start-wrapper')}>
-              <span onClick={this.startWrite}>
-                Start
-              </span>
-            </div>
-          }
+          {/*{*/}
+            {/*status === Status.STOP &&*/}
+            {/*<div className={cx('start-wrapper')}>*/}
+              {/*<span onClick={this.startWrite}>*/}
+                {/*Start*/}
+              {/*</span>*/}
+            {/*</div>*/}
+          {/*}*/}
         </div>
       </div>
     );

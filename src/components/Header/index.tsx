@@ -14,6 +14,7 @@ interface IOwnProps {
   push: (url: string) => void;
   currentUserInfo: any;
   setConfig: (config: IGlobalConfig) => void;
+  config: IGlobalConfig,
 }
 
 class Header extends React.Component<IOwnProps, {}> {
@@ -30,15 +31,13 @@ class Header extends React.Component<IOwnProps, {}> {
     return (<div>默认</div>);
   };
 
-  public handleSetConfig = () => {
-    this.props.setConfig({
-      limitNumber: 1,
-      limitTime: 1,
-      model: 'number',
-    });
+  public handleSetConfig = (config: IGlobalConfig) => {
+    this.props.setConfig(config);
   };
 
   public render(): React.ReactNode {
+    const { config } = this.props;
+    // @ts-ignore
     return (
       <header className={cx('header')}>
         <div className={cx('wrapper')}>
@@ -46,8 +45,13 @@ class Header extends React.Component<IOwnProps, {}> {
             <span>自由写作</span>
           </div>
           <div className={"header-option"}>
-            <div className={'option-status'} onClick={this.handleSetConfig}>当前模式</div>
-            <Popover placement="bottomRight" title={'自由'} content={<Tools/>} trigger="click">
+            <div className={'option-status'}>当前模式</div>
+            <Popover
+              placement="bottomRight"
+              title={'自由'}
+              content={<Tools config={config} handleConfirm={this.handleSetConfig}/>}
+              trigger="click"
+            >
               <Button htmlType={'button'}>模式设置</Button>
             </Popover>
             <div>
