@@ -4,12 +4,15 @@ import classNames from 'classnames/bind';
 import * as React from 'react';
 
 // @ts-ignore
+import { IGlobalConfig } from '../type';
 import styles from './Edit.scss';
 
 const {TextArea} = Input;
 const cx = classNames.bind(styles);
 
 interface IOwnProps {
+  config: IGlobalConfig;
+  model: 'time' | 'number',
   limitTime: {
     isOpen: boolean,
     time: number,
@@ -38,6 +41,10 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
       status: Status.STOP,
       timer: null,
     }
+  }
+
+  public componentDidMount(): void {
+    console.log(this.props.config);
   }
 
   public timerCompute = (newValue: string) => {
@@ -71,6 +78,10 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     const {editValue, status} = this.state;
     return (
       <div className={cx('edit-wrapper')}>
+        <div className={cx('edit-notice')}>
+          <span>字数：{editValue.length}</span>
+          <span>时间：111</span>
+        </div>
         <div className={cx('edit-content')}>
           <div className={cx('content-header')}>
             <Input placeholder="Basic usage"/>

@@ -1,0 +1,15 @@
+@import "../../asserts/style/variable";
+.header {
+  height: 60px;
+  box-sizing: border-box;
+  box-shadow: $shadow;
+
+  .wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    height: 100%;
+    max-width: 1300px;
+  }
+}

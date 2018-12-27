@@ -1,8 +1,8 @@
-import React from 'react'
-import { Route, Switch } from 'react-router'
-import CreateNew from './components/Edit'
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import CreateNew from './containers/EditContainer';
 import Home from './containers/HomeContainer';
-import Header from './components/Header';
+import Header from './containers/HeaderContainer';
 
 const routes = (
   <div>

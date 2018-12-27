@@ -8,14 +8,26 @@ interface IOwnProps {
   push: (url: string) => void;
 }
 
+interface IOwnStates {
+  historyList: null,
+}
+
 const cx = classNames.bind(styles);
-class Home extends React.Component<IOwnProps, {}>{
+class Home extends React.Component<IOwnProps, IOwnStates>{
+
+  constructor(props: IOwnProps) {
+    super(props);
+    this.state = {
+      historyList: null,
+    }
+  }
 
   public handleClick = () => {
     this.props.push('/create-new')
   };
 
   public render(): React.ReactNode {
+    const { historyList } = this.state;
     return (
       <div className={cx('home-wrapper')}>
         <div className={cx('home-left-wrapper')}>left</div>
@@ -25,11 +37,11 @@ class Home extends React.Component<IOwnProps, {}>{
           </div>
           <div>
             <h5>动态</h5>
-            <Card/>
+            {historyList && <Card />}
+            {!historyList && <div>暂时功能未开放</div>}
           </div>
         </div>
         <div className={cx('home-right-wrapper')}>什么是快速写作</div>
-
       </div>
     );
   }

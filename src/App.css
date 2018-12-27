@@ -4,15 +4,7 @@
   text-align: center;
 }
 
-.App-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: #222;
-  height: 50px;
-  box-sizing: border-box;
-  padding: 10px;
-  color: white;
-}
+
 
 .App-header .logo {
   line-height: 30px;

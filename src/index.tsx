@@ -12,12 +12,12 @@ import App from './App'
 import createRootReducer from './reducers/reducers';
 
 const history = createBrowserHistory();
-
+const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {};
 const store = createStore(
   createRootReducer(history), // root reducer with router state
   initialState,
-  compose(
+  composeEnhancer(
     applyMiddleware(
       routerMiddleware(history), // for dispatching history actions
       // ... other middlewares ...
