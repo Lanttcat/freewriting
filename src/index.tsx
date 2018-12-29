@@ -11,9 +11,17 @@ import {applyMiddleware, compose, createStore} from 'redux'
 import App from './App'
 import createRootReducer from './reducers/reducers';
 
+
 const history = createBrowserHistory();
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const initialState = {};
+const initialState = {
+  configReducer: {
+    clearTime: 5000,
+    limitNumber: 400,
+    limitTime: 600,
+    model: 'time',
+  }
+};
 const store = createStore(
   createRootReducer(history), // root reducer with router state
   initialState,

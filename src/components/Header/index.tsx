@@ -1,4 +1,4 @@
-import {Button, Popover} from 'antd';
+import {Avatar, Button, Popover} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import {push} from 'connected-react-router'
@@ -17,6 +17,11 @@ interface IOwnProps {
   config: IGlobalConfig,
 }
 
+const modelChinese = {
+  number: '字数模式',
+  time: '时间模式',
+};
+
 class Header extends React.Component<IOwnProps, {}> {
 
   public handleToHome = () => {
@@ -28,7 +33,7 @@ class Header extends React.Component<IOwnProps, {}> {
     if (currentUserInfo) {
       return (<div>{currentUserInfo}</div>);
     }
-    return (<div>默认</div>);
+    return (<div><Avatar style={{ backgroundColor: '#87d068' }}>佚名</Avatar></div>);
   };
 
   public handleSetConfig = (config: IGlobalConfig) => {
@@ -41,20 +46,20 @@ class Header extends React.Component<IOwnProps, {}> {
     return (
       <header className={cx('header')}>
         <div className={cx('wrapper')}>
-          <div className={'logo'} onClick={this.handleToHome}>
+          <div className={cx('logo')} onClick={this.handleToHome}>
             <span>自由写作</span>
           </div>
-          <div className={"header-option"}>
-            <div className={'option-status'}>当前模式</div>
+          <div className={cx("header-option")}>
+            <div className={cx('option-status', 'item')}>{modelChinese[config.model]}</div>
             <Popover
               placement="bottomRight"
               title={'自由'}
               content={<Tools config={config} handleConfirm={this.handleSetConfig}/>}
               trigger="click"
             >
-              <Button htmlType={'button'}>模式设置</Button>
+              <Button className={cx('model-setting item')} htmlType={'button'}>模式设置</Button>
             </Popover>
-            <div>
+            <div className={cx('item')}>
               {this.renderUserIcon()}
             </div>
           </div>

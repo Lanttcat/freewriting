@@ -1,5 +1,8 @@
 @import "../../asserts/style/variable";
+
 .header {
+  position: relative;
+  background: white;
   height: 60px;
   box-sizing: border-box;
   box-shadow: $shadow;
@@ -8,8 +11,30 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 14px;
     height: 100%;
     max-width: 1300px;
+
+    .logo {
+      line-height: 32px;
+      cursor: pointer;
+    }
+
+    .header-option {
+      display: flex;
+      justify-content: space-between;
+      width: 220px;
+
+      .item {
+      }
+      .option-status {
+        line-height: 32px;
+      }
+
+      .model-setting {
+        height: 32px;
+      }
+    }
+
   }
 }
