@@ -4,11 +4,12 @@ import classNames from 'classnames/bind';
 import {push} from 'connected-react-router'
 import * as React from 'react';
 import {connect} from "react-redux";
-import { IGlobalConfig } from '../../type';
-import styles from './Header.scss';
-const cx = classNames.bind(styles);
-
+import {EWriteModel} from "../../config";
+import {IGlobalConfig} from '../../type';
 import Tools from '../Tools';
+import styles from './Header.scss';
+
+const cx = classNames.bind(styles);
 
 interface IOwnProps {
   push: (url: string) => void;
@@ -44,21 +45,21 @@ class Header extends React.Component<IOwnProps, IOwnStates> {
     if (currentUserInfo) {
       return (<div>{currentUserInfo}</div>);
     }
-    return (<div><Avatar style={{ backgroundColor: '#87d068' }}>佚名</Avatar></div>);
+    return (<div><Avatar style={{backgroundColor: '#87d068'}}>佚名</Avatar></div>);
   };
 
   public handleVisibleChange = (isVisibleSetting: boolean) => {
-    this.setState({ isVisibleSetting });
+    this.setState({isVisibleSetting});
   }
 
   public handleSetConfig = (config: IGlobalConfig) => {
     this.props.setConfig(config);
-    this.setState({ isVisibleSetting: false});
+    this.setState({isVisibleSetting: false});
   };
 
   public render(): React.ReactNode {
-    const { config } = this.props;
-    const { isVisibleSetting } = this.state;
+    const {config} = this.props;
+    const {isVisibleSetting} = this.state;
     // @ts-ignore
     return (
       <header className={cx('header')}>
@@ -67,7 +68,17 @@ class Header extends React.Component<IOwnProps, IOwnStates> {
             <span>自由写作</span>
           </div>
           <div className={cx("header-option")}>
-            <div className={cx('option-status', 'item')}>{modelChinese[config.writeModel]}</div>
+            <div>
+              <span className={cx('option-status', 'item')}>{modelChinese[config.writeModel]}:</span>
+              {
+                config.writeModel === EWriteModel.NUMBER &&
+                <span className={cx('option-status')}>{config.minWordNumber} 字</span>
+              }
+              {
+                config.writeModel === EWriteModel.TIME &&
+                <span className={cx('option-status')}>{config.minWriteTime / 60} 分钟</span>
+              }
+            </div>
             <Popover
               placement="bottomRight"
               title={'自由'}

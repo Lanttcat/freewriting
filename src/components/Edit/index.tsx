@@ -127,7 +127,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   public timerDisplay = () => {
     setInterval(() => {
       const { writeTime } = this.state;
-      this.setState({writeTime: writeTime + 1}, () => console.log('dd'))
+      this.setState({writeTime: writeTime + 1});
     }, 1000);
   };
 
@@ -136,8 +136,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     const minute = Math.floor(writeTime / 60) > 0 ? `${Math.floor(writeTime / 60)} 分钟 ` : '';
     const second = `${writeTime % 60} 秒 `;
     return minute + second;
-  }
-
+  };
 
   public render() {
     const {articleWordCount, title, editValue} = this.state;
@@ -168,23 +167,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
               onChange={this.handleUserInput}
               ref={this.textAreaRef}
             />
-            {/*<TextArea*/}
-              {/*ref={this.textAreaRef}*/}
-              {/*className={cx('text-area')}*/}
-              {/*value={editValue}*/}
-              {/*onFocus={this.startWrite}*/}
-              {/*onCompositionEnd={this.handleComposition}*/}
-              {/*onChange={this.handleUserInput}*/}
-            {/*/>*/}
           </div>
-          {/*{*/}
-          {/*status === Status.STOP &&*/}
-          {/*<div className={cx('start-wrapper')}>*/}
-          {/*<span onClick={this.startWrite}>*/}
-          {/*Start*/}
-          {/*</span>*/}
-          {/*</div>*/}
-          {/*}*/}
         </div>
       </div>
     );

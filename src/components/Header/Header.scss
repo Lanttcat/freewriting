@@ -23,11 +23,12 @@
     .header-option {
       display: flex;
       justify-content: space-between;
-      width: 220px;
+      min-width: 300px;
 
       .item {
       }
       .option-status {
+        margin: auto 5px;
         line-height: 32px;
       }
 
