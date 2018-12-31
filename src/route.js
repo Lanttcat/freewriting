@@ -12,7 +12,7 @@ const routes = (
       {/*<Route path="/create-new" component={CreateNew} />*/}
       <Route component={Home} />
     </Switch>
-    <div>这里是footer</div>
+    {/*<div>这里是footer</div>*/}
   </div>
 );
 

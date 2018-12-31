@@ -2,7 +2,7 @@
 
 .home-wrapper {
   display: flex;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   min-width: 1024px;
   max-width: 1300px;
   min-height: calc(100vh - 114px);
@@ -37,7 +37,7 @@
     flex-grow: 1;
     flex-shrink: 1;
     min-width: 220px;
-    padding: 40px 15px;
+    padding: 80px 15px;
     box-sizing: border-box;
 
     .item {

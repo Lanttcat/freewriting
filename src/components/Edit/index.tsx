@@ -49,11 +49,6 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     }
   }
 
-  public componentDidMount(): void {
-    console.log(this.props.config);
-    this.timerDisplay()
-  }
-
   public openNotification = () => {
     notification.open({
       description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
@@ -116,6 +111,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
         this.setState({status: EStatus.FINISH});
       }, config.minWriteTime * 1000);
     }
+
+    this.timerDisplay()
   };
 
   public copyValueToClipboard = () => {
