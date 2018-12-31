@@ -2,6 +2,7 @@ import {Button, InputNumber, Radio, Select, Tooltip} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';
+import { EWriteModel } from '../../config';
 import { IGlobalConfig } from '../../type';
 // @ts-ignore
 import styles from './Tools.scss';
@@ -20,7 +21,7 @@ interface IOwnStates {
   clearTime: number,
   limitNumber: number,
   limitTime: number,
-  model: 'number' | 'time',
+  model: EWriteModel,
 }
 
 class Tools extends React.Component<IOwnProps, IOwnStates> {
@@ -28,10 +29,10 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
     super(props);
     const { config } = this.props;
     this.state = {
-      clearTime: config.clearTime * 1000,
-      limitNumber: config.limitNumber,
-      limitTime: config.limitTime,
-      model: config.model,
+      clearTime: config.clearWordsTime * 1000,
+      limitNumber: config.minWordNumber,
+      limitTime: config.minWriteTime,
+      model: config.writeModel,
     };
   }
 
@@ -54,7 +55,7 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
   public handleSettingSubmit = (event: any) => {
     const { clearTime, limitTime, limitNumber, model } = this.state;
     // 应该提交到服务器
-    const userConfig: IGlobalConfig = { clearTime, limitNumber, limitTime, model };
+    const userConfig: IGlobalConfig = { clearWordsTime: clearTime, minWordNumber: limitNumber, minWriteTime: limitTime, writeModel: model };
     this.props.handleConfirm(userConfig);
   };
 

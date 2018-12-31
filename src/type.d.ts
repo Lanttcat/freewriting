@@ -1,8 +1,9 @@
+import { EWriteModel } from './config';
 export interface IGlobalConfig {
-  clearTime: number,
-  limitNumber: number,
-  limitTime: number,
-  model: 'number' | 'time',
+  clearWordsTime: number, // 过期自动清理时间 单位 秒
+  minWordNumber: number, // 字数模式：限制字数
+  minWriteTime: number, // 时间模式：限制时间 单位 秒
+  writeModel: EWriteModel, // 模式
 }
 
 export interface IGlobalConfigAction {

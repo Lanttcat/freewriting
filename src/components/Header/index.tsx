@@ -50,7 +50,7 @@ class Header extends React.Component<IOwnProps, {}> {
             <span>自由写作</span>
           </div>
           <div className={cx("header-option")}>
-            <div className={cx('option-status', 'item')}>{modelChinese[config.model]}</div>
+            <div className={cx('option-status', 'item')}>{modelChinese[config.writeModel]}</div>
             <Popover
               placement="bottomRight"
               title={'自由'}

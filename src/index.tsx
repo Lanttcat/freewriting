@@ -16,10 +16,10 @@ const history = createBrowserHistory();
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
   configReducer: {
-    clearTime: 5000,
-    limitNumber: 400,
-    limitTime: 600,
-    model: 'time',
+    clearWordsTime: 5,
+    minWordNumber: 500,
+    minWriteTime: 600,
+    writeModel: 'number',
   }
 };
 const store = createStore(
