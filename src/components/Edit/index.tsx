@@ -69,16 +69,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     clearTimeout(this.state.timer);
     const tempTimer = setTimeout(() => {
       this.setState({editValue: ''});
-    }, clearWordsTime);
+    }, clearWordsTime * 1000);
     this.setState({timer: tempTimer});
-  };
-
-  public handleEndTime = () => {
-    this.openNotification();
-  };
-
-  public handleMaxTime = () => {
-    this.openNotification();
   };
 
   public handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -122,7 +114,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
       // 检测时间模式下：是否完成
       setTimeout(() => {
         this.setState({status: EStatus.FINISH});
-      }, config.minWriteTime);
+      }, config.minWriteTime * 1000);
     }
   };
 

@@ -1,21 +1,22 @@
 @import "../../asserts/style/variable";
+
 .home-wrapper {
   display: flex;
-  margin: 24px auto;
-  padding: 24px;
+  margin: 0 auto;
   min-width: 1024px;
   max-width: 1300px;
   min-height: calc(100vh - 114px);
 
   .home-left-wrapper {
     flex-grow: 1;
+    flex-shrink: 1;
     min-width: 220px;
   }
 
   .home-content-wrapper {
-    margin: 0 24px;
-    flex-grow: 5;
-
+    flex-grow: 8;
+    flex-shrink: 8;
+    min-width: 870px;
 
     .create-new {
       margin: 0 0 15px 0;
@@ -34,6 +35,14 @@
 
   .home-right-wrapper {
     flex-grow: 1;
+    flex-shrink: 1;
     min-width: 220px;
+    padding: 40px 15px;
+    box-sizing: border-box;
+
+    .item {
+      cursor: pointer;
+      color: #8c8c8c;
+    }
   }
 }

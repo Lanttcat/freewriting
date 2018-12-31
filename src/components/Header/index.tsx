@@ -17,12 +17,23 @@ interface IOwnProps {
   config: IGlobalConfig,
 }
 
+interface IOwnStates {
+  isVisibleSetting: boolean;
+}
+
 const modelChinese = {
   number: '字数模式',
   time: '时间模式',
 };
 
-class Header extends React.Component<IOwnProps, {}> {
+class Header extends React.Component<IOwnProps, IOwnStates> {
+
+  constructor(props: IOwnProps) {
+    super(props);
+    this.state = {
+      isVisibleSetting: false,
+    }
+  }
 
   public handleToHome = () => {
     this.props.push('/');
@@ -36,12 +47,18 @@ class Header extends React.Component<IOwnProps, {}> {
     return (<div><Avatar style={{ backgroundColor: '#87d068' }}>佚名</Avatar></div>);
   };
 
+  public handleVisibleChange = (isVisibleSetting: boolean) => {
+    this.setState({ isVisibleSetting });
+  }
+
   public handleSetConfig = (config: IGlobalConfig) => {
     this.props.setConfig(config);
+    this.setState({ isVisibleSetting: false});
   };
 
   public render(): React.ReactNode {
     const { config } = this.props;
+    const { isVisibleSetting } = this.state;
     // @ts-ignore
     return (
       <header className={cx('header')}>
@@ -56,6 +73,8 @@ class Header extends React.Component<IOwnProps, {}> {
               title={'自由'}
               content={<Tools config={config} handleConfirm={this.handleSetConfig}/>}
               trigger="click"
+              visible={isVisibleSetting}
+              onVisibleChange={this.handleVisibleChange}
             >
               <Button className={cx('model-setting item')} htmlType={'button'}>模式设置</Button>
             </Popover>

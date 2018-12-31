@@ -1,7 +1,9 @@
+import {Popover} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';
-import Card from '../../share/Card';
+// import Card from '../../share/Card';
+import Edit from '../../containers/EditContainer';
 import styles from './Home.scss';
 
 interface IOwnProps {
@@ -27,21 +29,31 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
   };
 
   public render(): React.ReactNode {
-    const { historyList } = this.state;
+    // const { historyList } = this.state;
     return (
       <div className={cx('home-wrapper')}>
-        <div className={cx('home-left-wrapper')}>left</div>
+        <div className={cx('home-left-wrapper')}/>
         <div className={cx('home-content-wrapper')}>
-          <div className={cx('create-new')} onClick={this.handleClick}>
-            开始自由写作
-          </div>
-          <div>
-            <h5>动态</h5>
-            {historyList && <Card />}
-            {!historyList && <div>暂时功能未开放</div>}
-          </div>
+          <Edit />
+          {/*<div className={cx('create-new')} onClick={this.handleClick}>*/}
+            {/*开始自由写作*/}
+          {/*</div>*/}
+          {/*<div>*/}
+            {/*<h5>动态</h5>*/}
+            {/*{historyList && <Card />}*/}
+            {/*{!historyList && <div>暂时功能未开放</div>}*/}
+          {/*</div>*/}
         </div>
-        <div className={cx('home-right-wrapper')}>什么是快速写作</div>
+        <div className={cx('home-right-wrapper')}>
+          <Popover
+            content={'ddd'}
+            title="Title"
+            trigger="hover"
+            placement="leftTop"
+          >
+            <p className={cx('item')}>什么是快速写作?</p>
+          </Popover>
+        </div>
       </div>
     );
   }

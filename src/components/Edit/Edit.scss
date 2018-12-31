@@ -1,8 +1,6 @@
 .edit-wrapper {
-  padding: 0 0 50px 0;
   width: 100%;
   box-sizing: border-box;
-  background: #fafafa;
 
   .edit-notice {
     position: relative;
@@ -11,7 +9,7 @@
     justify-content: flex-end;
     padding: 10px 40px;
     box-sizing: border-box;
-    max-width: 770px;
+    max-width: 870px;
 
     .copy-btn {
       height: 22px;
@@ -34,7 +32,7 @@
   margin: 0 auto;
   padding: 10px 40px;
   box-sizing: border-box;
-  max-width: 770px;
+  max-width: 870px;
   border: 1px solid #e8e8e8;
   box-shadow: 0 2px 8px hsla(0, 0%, 45.1%, .08);
   background: white;

@@ -29,9 +29,9 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
     super(props);
     const { config } = this.props;
     this.state = {
-      clearTime: config.clearWordsTime * 1000,
+      clearTime: config.clearWordsTime,
       limitNumber: config.minWordNumber,
-      limitTime: config.minWriteTime,
+      limitTime: config.minWriteTime / 1000,
       model: config.writeModel,
     };
   }
@@ -55,7 +55,12 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
   public handleSettingSubmit = (event: any) => {
     const { clearTime, limitTime, limitNumber, model } = this.state;
     // 应该提交到服务器
-    const userConfig: IGlobalConfig = { clearWordsTime: clearTime, minWordNumber: limitNumber, minWriteTime: limitTime, writeModel: model };
+    const userConfig: IGlobalConfig = {
+      clearWordsTime: clearTime,
+      minWordNumber: limitNumber,
+      minWriteTime: limitTime * 1000,
+      writeModel: model
+    };
     this.props.handleConfirm(userConfig);
   };
 
