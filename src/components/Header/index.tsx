@@ -1,4 +1,4 @@
-import {Avatar, Button, Popover} from 'antd';
+import {Avatar, Button, Popover, Tooltip} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import {push} from 'connected-react-router'
@@ -45,7 +45,11 @@ class Header extends React.Component<IOwnProps, IOwnStates> {
     if (currentUserInfo) {
       return (<div>{currentUserInfo}</div>);
     }
-    return (<div><Avatar style={{backgroundColor: '#87d068'}}>佚名</Avatar></div>);
+    return (<div>
+      <Tooltip placement="bottomRight" title={'欢迎你，自由创作人'}>
+        <Avatar className={cx('user-icon')} style={{backgroundColor: '#87d068'}}>佚名</Avatar>
+      </Tooltip>
+    </div>);
   };
 
   public handleVisibleChange = (isVisibleSetting: boolean) => {
@@ -80,6 +84,7 @@ class Header extends React.Component<IOwnProps, IOwnStates> {
               }
             </div>
             <Popover
+              defaultVisible={false}
               placement="bottomRight"
               title={'自由'}
               content={<Tools config={config} handleConfirm={this.handleSetConfig}/>}

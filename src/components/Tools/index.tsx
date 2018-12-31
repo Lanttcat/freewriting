@@ -75,7 +75,6 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
               value={clearTime}
               className={cx('select-time')}
               placeholder="选择最长停笔时间..."
-              optionFilterProp="children"
               onSelect={this.setClearTime}
             >
               <Option value={5}>5秒</Option>
@@ -85,9 +84,9 @@ class Tools extends React.Component<IOwnProps, IOwnStates> {
           </Tooltip>
         </div>
         <div className={cx('option')}>
-          <RadioGroup value={model} onChange={this.setModel}>
-            <Radio value={'time'}>时间模式</Radio>
-            <Radio value={'number'}>字数模式</Radio>
+          <RadioGroup value={model} defaultValue={EWriteModel.NUMBER} onChange={this.setModel}>
+            <Radio value={EWriteModel.TIME}>时间模式</Radio>
+            <Radio value={EWriteModel.NUMBER}>字数模式</Radio>
             {/*<Radio value={'none'}>无限制模式</Radio>*/}
           </RadioGroup>
         </div>

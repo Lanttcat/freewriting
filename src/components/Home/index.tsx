@@ -2,6 +2,7 @@ import {Popover} from 'antd';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';
+import Introduce from '../../components/Introduce';
 // import Card from '../../share/Card';
 import Edit from '../../containers/EditContainer';
 import styles from './Home.scss';
@@ -16,7 +17,6 @@ interface IOwnStates {
 
 const cx = classNames.bind(styles);
 class Home extends React.Component<IOwnProps, IOwnStates>{
-
   constructor(props: IOwnProps) {
     super(props);
     this.state = {
@@ -35,19 +35,12 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
         <div className={cx('home-left-wrapper')}/>
         <div className={cx('home-content-wrapper')}>
           <Edit />
-          {/*<div className={cx('create-new')} onClick={this.handleClick}>*/}
-            {/*开始自由写作*/}
-          {/*</div>*/}
-          {/*<div>*/}
-            {/*<h5>动态</h5>*/}
-            {/*{historyList && <Card />}*/}
-            {/*{!historyList && <div>暂时功能未开放</div>}*/}
-          {/*</div>*/}
         </div>
         <div className={cx('home-right-wrapper')}>
           <Popover
-            content={'ddd'}
-            title="Title"
+            overlayClassName={cx('pop-over')}
+            content={<Introduce/>}
+            title={<div className={cx('pop-style')}>关于自由写作</div>}
             trigger="hover"
             placement="leftTop"
           >
