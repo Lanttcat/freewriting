@@ -1,8 +1,11 @@
-import {Button, Input, notification} from 'antd';
+import Button from 'antd/lib/button';
+import Input from 'antd/lib/input';
+import notification from 'antd/lib/notification';
 // @ts-ignore
 import classNames from 'classnames/bind';
 
-import * as _ from 'lodash';
+// @ts-ignore
+import size from 'lodash/size';
 // @ts-ignore
 import moment from 'moment';
 import * as React from 'react';
@@ -84,7 +87,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   public handleComposition = (event: React.CompositionEvent<HTMLTextAreaElement>) => {
     if (event.type === 'compositionend') {
       // composition is end
-      const currentArticleSize = _.size(this.state.editValue);
+      const currentArticleSize = size(this.state.editValue);
 
       // 检测字数模式下：是否完成
       if (this.isFinishUnderMinWordNumberModel(currentArticleSize)) {

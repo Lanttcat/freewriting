@@ -1,4 +1,7 @@
-import {Avatar, Button, Popover, Tooltip} from 'antd';
+import Avatar from 'antd/lib/avatar';
+import Button from 'antd/lib/button';
+import Popover from 'antd/lib/popover';
+import Tooltip from 'antd/lib/tooltip';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import {push} from 'connected-react-router'

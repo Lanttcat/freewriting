@@ -1,4 +1,8 @@
-import {Button, InputNumber, Radio, Select, Tooltip} from 'antd';
+import Button from 'antd/lib/button';
+import InputNumber from 'antd/lib/input-number';
+import Radio from 'antd/lib/radio';
+import Select from 'antd/lib/select';
+import Tooltip from 'antd/lib/tooltip';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';

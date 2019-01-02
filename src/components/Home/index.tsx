@@ -1,4 +1,4 @@
-import {Popover} from 'antd';
+import Popover from 'antd/lib/popover';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';
