@@ -81,6 +81,10 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.setState({editValue: tempInputValue});
   };
 
+  public handleUserCopy = () => {
+    setTimeout(() => this.setState({editValue: '请勿作弊'}), 100);
+  };
+
   public handleUserInputTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const tempInputValue = event.target.value;
     this.setState({title: tempInputValue})
@@ -147,7 +151,17 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
 
   public handleFinishGoal = () => {
     clearTimeout(this.state.timer);
-    this.copyValueToClipboard();
+    this.openNotification();
+  };
+
+  public isFinished = () => {
+    const { config } = this.props;
+    const { articleWordCount, writeTime } = this.state;
+    const handleFunc = {
+      number: () => articleWordCount > config.minWordNumber,
+      time: () => writeTime > config.minWriteTime,
+    };
+    return handleFunc[config.writeModel]();
   };
 
   public render() {
@@ -162,7 +176,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
             htmlType={'button'}
             onClick={this.copyValueToClipboard}
             size={"small"}
-            disabled={this.state.status === EStatus.WRITING}
+            disabled={!this.isFinished()}
           >
             复制
           </Button>
@@ -178,6 +192,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
               onFocus={this.startWrite}
               onCompositionEnd={this.handleComposition}
               onChange={this.handleUserInput}
+              onPaste={this.handleUserCopy}
               ref={this.textAreaRef}
             />
           </div>
