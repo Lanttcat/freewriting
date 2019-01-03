@@ -26,6 +26,7 @@ interface IOwnStates {
   status: EStatus,
   articleWordCount: number,
   writeTime: number,
+  displayTimer: any,
 }
 
 enum EStatus {
@@ -44,6 +45,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.textAreaRef = React.createRef();
     this.state = {
       articleWordCount: 0,
+      displayTimer: null,
       editValue: '',
       status: EStatus.STOP,
       timer: null,
@@ -54,8 +56,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
 
   public openNotification = () => {
     notification.open({
-      description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-      message: 'Notification Title',
+      description: '已经完成目标，编辑内容已复制到剪贴板',
+      message: '完成目标',
       onClick: () => {
         console.log('Notification Clicked!');
       },
@@ -91,7 +93,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
 
       // 检测字数模式下：是否完成
       if (this.isFinishUnderMinWordNumberModel(currentArticleSize)) {
-        this.setState({status: EStatus.FINISH})
+        this.setState({status: EStatus.FINISH});
+        this.handleFinishGoal();
       }
       this.setState({articleWordCount: currentArticleSize})
     }
@@ -110,8 +113,10 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.setState({status: EStatus.WRITING});
     if (config.writeModel === EWriteModel.TIME) {
       // 检测时间模式下：是否完成
+
       setTimeout(() => {
         this.setState({status: EStatus.FINISH});
+        this.handleFinishGoal();
       }, config.minWriteTime * 1000);
     }
 
@@ -121,14 +126,16 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   public copyValueToClipboard = () => {
     // 使用tooltip提示复制成功
     this.textAreaRef.current!.select();
-    document.execCommand('copy');
+    document.execCommand('copy', false);
   };
 
   public timerDisplay = () => {
-    setInterval(() => {
+    clearInterval(this.state.displayTimer);
+    const timer= setInterval(() => {
       const { writeTime } = this.state;
       this.setState({writeTime: writeTime + 1});
     }, 1000);
+    this.setState({displayTimer: timer});
   };
 
   public formatDisplayTime = () => {
@@ -136,6 +143,11 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     const minute = Math.floor(writeTime / 60) > 0 ? `${Math.floor(writeTime / 60)} 分钟 ` : '';
     const second = `${writeTime % 60} 秒 `;
     return minute + second;
+  };
+
+  public handleFinishGoal = () => {
+    clearTimeout(this.state.timer);
+    this.copyValueToClipboard();
   };
 
   public render() {
@@ -150,6 +162,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
             htmlType={'button'}
             onClick={this.copyValueToClipboard}
             size={"small"}
+            disabled={this.state.status === EStatus.WRITING}
           >
             复制
           </Button>
