@@ -9,6 +9,7 @@ import * as React from 'react';
 import {connect} from "react-redux";
 import {EWriteModel} from "../../config";
 import {IGlobalConfig} from '../../type';
+import {setUserConfig} from "../../util/storageUserConfig";
 import Tools from '../Tools';
 import styles from './Header.scss';
 
@@ -61,6 +62,7 @@ class Header extends React.Component<IOwnProps, IOwnStates> {
 
   public handleSetConfig = (config: IGlobalConfig) => {
     this.props.setConfig(config);
+    setUserConfig(config);
     this.setState({isVisibleSetting: false});
   };
 

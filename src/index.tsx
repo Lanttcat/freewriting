@@ -10,12 +10,15 @@ import {createBrowserHistory} from 'history';
 import {applyMiddleware, compose, createStore} from 'redux'
 import App from './App'
 import createRootReducer from './reducers/reducers';
+import {getUserConfig} from "./util/storageUserConfig";
 
 
+const localUserConfig = getUserConfig();
+console.log(localUserConfig);
 const history = createBrowserHistory();
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const initialState = {
-  configReducer: {
+  configReducer: localUserConfig || {
     clearWordsTime: 5,
     minWordNumber: 500,
     minWriteTime: 600,
