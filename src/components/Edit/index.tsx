@@ -81,22 +81,16 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   };
 
   public handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(11);
-    const { currentInputModel, editValue } = this.state;
+    const { currentInputModel, status } = this.state;
     const tempInputValue = event.target.value;
-    if (this.state.status === EStatus.WRITING) {
+    if (status === EStatus.WRITING) {
       this.timerCompute();
     }
     if (currentInputModel === EInputModel.COMPOSITION) {
       this.setState({editValue: tempInputValue});
-      return;
+    } else {
+      this.setState({articleWordCount: size(tempInputValue), editValue: tempInputValue});
     }
-
-    const currentArticleSize = size(editValue);
-    this.setState({
-      articleWordCount: currentArticleSize ,
-      editValue: tempInputValue,
-    });
   };
 
   public handleUserCopy = () => {
@@ -109,13 +103,11 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   };
 
   public handleCompositionStart = () => {
-    console.log(22);
     this.setState({currentInputModel: EInputModel.COMPOSITION});
   };
 
   public handleCompositionEnd = () => {
-    console.log(33);
-    this.setState({currentInputModel: EInputModel.CHANGE});
+    this.setState({currentInputModel: EInputModel.CHANGE, articleWordCount: size(this.state.editValue)});
   };
 
   public startWrite = () => {
