@@ -10,11 +10,14 @@
     padding: 10px 40px;
     box-sizing: border-box;
     max-width: 870px;
+    line-height: 20px;
+    color: #8c8c8c;
+    font-size: 14px;
 
     .number {
       & > span {
         display: inline-block;
-        width: 4rem;
+        width: 2rem;
       }
     }
 
@@ -27,12 +30,15 @@
     }
 
     .copy-btn {
-      height: 22px;
+      height: 20px;
     }
 
     & > span {
       display: inline-block;
-      margin: 0 10px;
+    }
+
+    & > button {
+      margin-left: 20px;
     }
   }
 
