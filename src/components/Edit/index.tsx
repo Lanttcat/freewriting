@@ -61,6 +61,15 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     }
   }
 
+  public setWriteStatus = () => {
+    if (this.isFinished()) {
+      this.setState({status: EStatus.FINISH});
+      clearTimeout(this.state.timer);
+    } else {
+      this.setState({status: EStatus.WRITING});
+    }
+  };
+
   public openNotification = () => {
     notification.open({
       description: '已经完成目标，编辑内容已复制到剪贴板',
@@ -75,7 +84,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     const {clearWordsTime} = this.props.config;
     clearTimeout(this.state.timer);
     const tempTimer = setTimeout(() => {
-      this.setState({editValue: ''});
+      this.setState({editValue: '', articleWordCount: 0});
     }, clearWordsTime * 1000);
     this.setState({timer: tempTimer});
   };
@@ -87,9 +96,9 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
       this.timerCompute();
     }
     if (currentInputModel === EInputModel.COMPOSITION) {
-      this.setState({editValue: tempInputValue});
+      this.setState({editValue: tempInputValue}, this.setWriteStatus);
     } else {
-      this.setState({articleWordCount: size(tempInputValue), editValue: tempInputValue});
+      this.setState({articleWordCount: size(tempInputValue), editValue: tempInputValue}, this.setWriteStatus);
     }
   };
 
@@ -139,9 +148,9 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
 
   public formatDisplayTime = () => {
     const {writeTime} = this.state;
-    const minute = Math.floor(writeTime / 60) > 0 ? `${Math.floor(writeTime / 60)} 分钟 ` : '';
-    const second = `${writeTime % 60} 秒 `;
-    return minute + second;
+    const minute = Math.floor(writeTime / 60) > 0 ? `${Math.floor(writeTime / 60)}` : 0;
+    const second = `${writeTime % 60}`;
+    return (<span><span>{minute}</span> 分钟<span>{second}</span> 秒</span>);
   };
 
   public handleFinishGoal = () => {
@@ -164,8 +173,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     return (
       <div className={cx('edit-wrapper')}>
         <div className={cx('edit-notice')}>
-          <span>字数：{articleWordCount}</span>
-          <span>时间：{ this.formatDisplayTime() }</span>
+          <span className={cx('number')}>字数：<span>{articleWordCount}</span></span>
+          <span className={cx('time')}>时间：{ this.formatDisplayTime() }</span>
           <Button
             className={cx('copy-btn')}
             htmlType={'button'}

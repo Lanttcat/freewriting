@@ -11,6 +11,21 @@
     box-sizing: border-box;
     max-width: 870px;
 
+    .number {
+      & > span {
+        display: inline-block;
+        width: 4rem;
+      }
+    }
+
+    .time {
+      & > span > span {
+        display: inline-block;
+        width: 2rem;
+        text-align: right;
+      }
+    }
+
     .copy-btn {
       height: 22px;
     }
