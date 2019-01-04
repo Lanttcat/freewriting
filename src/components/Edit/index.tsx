@@ -5,6 +5,8 @@ import notification from 'antd/lib/notification';
 import classNames from 'classnames/bind';
 
 // @ts-ignore
+import once from 'lodash/once';
+// @ts-ignore
 import size from 'lodash/size';
 // @ts-ignore
 import moment from 'moment';
@@ -46,9 +48,12 @@ const todayString = moment().endOf('day').format('YYYYMMDD');
 class Edit extends React.Component<IOwnProps, IOwnStates> {
 
   private readonly textAreaRef: React.RefObject<HTMLTextAreaElement>;
+  private readonly onceOpenNotification: any;
+
   constructor(props: IOwnProps) {
     super(props);
     this.textAreaRef = React.createRef();
+    this.onceOpenNotification = once(this.openNotification);
     this.state = {
       articleWordCount: 0,
       currentInputModel: EInputModel.CHANGE,
@@ -65,14 +70,16 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     if (this.isFinished()) {
       this.setState({status: EStatus.FINISH});
       clearTimeout(this.state.timer);
+      this.onceOpenNotification();
     } else {
       this.setState({status: EStatus.WRITING});
     }
   };
 
+
   public openNotification = () => {
-    notification.open({
-      description: '已经完成目标，编辑内容已复制到剪贴板',
+    notification.success({
+      description: '已经完成目标，编辑内容可以通过复制按钮复制到剪贴板',
       message: '完成目标',
       onClick: () => {
         console.log('Notification Clicked!');
