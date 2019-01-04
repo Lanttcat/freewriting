@@ -27,12 +27,18 @@ interface IOwnStates {
   articleWordCount: number,
   writeTime: number,
   displayTimer: any,
+  currentInputModel: EInputModel
 }
 
 enum EStatus {
   STOP = 'stop',
   WRITING = 'writing',
   FINISH = 'finish',
+}
+
+enum EInputModel {
+  CHANGE = 'input',
+  COMPOSITION = 'composition',
 }
 
 const todayString = moment().endOf('day').format('YYYYMMDD');
@@ -45,6 +51,7 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.textAreaRef = React.createRef();
     this.state = {
       articleWordCount: 0,
+      currentInputModel: EInputModel.CHANGE,
       displayTimer: null,
       editValue: '',
       status: EStatus.STOP,
@@ -74,11 +81,22 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
   };
 
   public handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(11);
+    const { currentInputModel, editValue } = this.state;
     const tempInputValue = event.target.value;
     if (this.state.status === EStatus.WRITING) {
       this.timerCompute();
     }
-    this.setState({editValue: tempInputValue});
+    if (currentInputModel === EInputModel.COMPOSITION) {
+      this.setState({editValue: tempInputValue});
+      return;
+    }
+
+    const currentArticleSize = size(editValue);
+    this.setState({
+      articleWordCount: currentArticleSize ,
+      editValue: tempInputValue,
+    });
   };
 
   public handleUserCopy = () => {
@@ -90,26 +108,14 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.setState({title: tempInputValue})
   };
 
-  public handleComposition = (event: React.CompositionEvent<HTMLTextAreaElement>) => {
-    if (event.type === 'compositionend') {
-      // composition is end
-      const currentArticleSize = size(this.state.editValue);
-
-      // 检测字数模式下：是否完成
-      if (this.isFinishUnderMinWordNumberModel(currentArticleSize)) {
-        this.setState({status: EStatus.FINISH});
-        this.handleFinishGoal();
-      }
-      this.setState({articleWordCount: currentArticleSize})
-    }
+  public handleCompositionStart = () => {
+    console.log(22);
+    this.setState({currentInputModel: EInputModel.COMPOSITION});
   };
 
-  public isFinishUnderMinWordNumberModel = (wordNumber: number) => {
-    const { status } = this.state;
-    const { config } = this.props;
-    return status === EStatus.WRITING
-      && config.writeModel === EWriteModel.NUMBER
-      && wordNumber > config.minWordNumber;
+  public handleCompositionEnd = () => {
+    console.log(33);
+    this.setState({currentInputModel: EInputModel.CHANGE});
   };
 
   public startWrite = () => {
@@ -117,13 +123,10 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
     this.setState({status: EStatus.WRITING});
     if (config.writeModel === EWriteModel.TIME) {
       // 检测时间模式下：是否完成
-
       setTimeout(() => {
         this.setState({status: EStatus.FINISH});
         this.handleFinishGoal();
-      }, config.minWriteTime * 1000);
-    }
-
+      }, config.minWriteTime * 1000);}
     this.timerDisplay()
   };
 
@@ -190,7 +193,8 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
               className={cx('text-area')}
               value={editValue}
               onFocus={this.startWrite}
-              onCompositionEnd={this.handleComposition}
+              onCompositionStart={this.handleCompositionStart}
+              onCompositionEnd={this.handleCompositionEnd}
               onChange={this.handleUserInput}
               onPaste={this.handleUserCopy}
               ref={this.textAreaRef}
