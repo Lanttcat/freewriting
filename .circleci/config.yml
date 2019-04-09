@@ -41,11 +41,11 @@ jobs:
       timezone:
         Asia/Shanghai # 设置上海时区
       enabled: true
-    working_directory: /tmp/workspace
+    working_directory: ~/repo
     steps:
       - run: echo "====================部署开始=============================="
       - attach_workspace:
-          at: /tmp/workspace
+          at: ~/repo
       - run: echo 'export REMOTE_HOST="$REMOTE_HOST"' >> $BASH_ENV
       - run: echo 'export REMOTE_HOST="$REMOTE_NAME"' >> $BASH_ENV
       - run: source $BASH_ENV
