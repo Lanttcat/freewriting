@@ -56,9 +56,10 @@ jobs:
       - run: echo 'export REMOTE_HOST="$REMOTE_NAME"' >> $BASH_ENV
       - run: source $BASH_ENV
       - run: pwd && ls -al
+      - run: chmod 777 ./.circleci/deploy-master.sh'
       - run:
           name: Deploy Over SSH
-          command: 'sudo ./.circleci/deploy-master.sh'
+          command: ./.circleci/deploy-master.sh
       - run: echo "====================部署完毕=============================="
 
 workflows:
