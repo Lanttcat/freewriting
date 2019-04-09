@@ -46,9 +46,9 @@ jobs:
       - run: echo "====================部署开始=============================="
       - attach_workspace:
           at: /tmp/workspace
-      - run: echo 'export REMOTE_HOST='{{ REMOTE_HOST }}' >> $BASH_ENV
-      - run: echo 'export REMOTE_HOST='{{ REMOTE_NAME }}' >> $BASH_ENV
-      - run: echo 'export REMOTE_HOST='{{ REMOTE_HOST }}' >> $BASH_ENV
+      - run: echo 'export REMOTE_HOST={{ REMOTE_HOST }}' >> $BASH_ENV
+      - run: echo 'export REMOTE_HOST={{ REMOTE_NAME }}' >> $BASH_ENV
+      - run: echo 'export REMOTE_HOST={{ REMOTE_HOST }}' >> $BASH_ENV
       - run: source $BASH_ENV
       - run: pwd && ls -al
       - run:
