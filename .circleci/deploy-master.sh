@@ -3,10 +3,10 @@
 user=$REMOTE_NAME
 host=$REMOTE_HOST
 src=`pwd`"/"
-#des=/data/www/api.www.zjj7.com/
+des=~/test/
 now=`date +"%Y-%m-%d %H:%M:%S"`
 
-#rsync -vzrc --delete  --exclude ".git"  --exclude ".env"   --exclude ".circleci"   $src  $user@$host:$des
+rsync -vzrc --delete  --exclude ".git"  --exclude ".env"   --exclude ".circleci"   $src  $user@$host:$des
 
 #ssh $user@$host "sudo chown -R www:www $des"
 

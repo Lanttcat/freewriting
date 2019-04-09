@@ -53,10 +53,10 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: echo 'export REMOTE_HOST="$REMOTE_HOST"' >> $BASH_ENV
-      - run: echo 'export REMOTE_HOST="$REMOTE_NAME"' >> $BASH_ENV
+      - run: echo 'export REMOTE_NAME="$REMOTE_NAME"' >> $BASH_ENV
       - run: source $BASH_ENV
       - run: pwd && ls -al
-      - run: chmod 777 ./.circleci/deploy-master.sh
+      - run: chmod 777 .circleci/deploy-master.sh
       - run:
           name: Deploy Over SSH
           command: ./.circleci/deploy-master.sh
