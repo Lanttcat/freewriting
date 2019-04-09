@@ -60,6 +60,7 @@ jobs:
       - run: echo 'export REMOTE_NAME="$REMOTE_NAME"' >> $BASH_ENV
       - run: source $BASH_ENV
       - run: pwd && ls -al
+      - run: pwd && ls ./build
       - run: chmod 777 .circleci/deploy-master.sh
       - run:
           name: Deploy Over SSH
