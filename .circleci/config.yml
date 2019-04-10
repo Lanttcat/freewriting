@@ -62,7 +62,6 @@ jobs:
       - run: pwd && ls -al
       - run: pwd && ls ./build
       - run: chmod 777 .circleci/deploy-master.sh
-      - run: ssh-keygen -R $LOCAL_MY
       - run:
           name: Deploy Over SSH
           command: ./.circleci/deploy-master.sh
