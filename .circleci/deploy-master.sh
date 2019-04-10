@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-user=$REMOTE_NAME
-host=$REMOTE_HOST
-src=`pwd`"/build/"
+USER=$REMOTE_NAME
+HOST=$REMOTE_HOST
+SRC=`pwd`"/build/"
 des=~/test/
-now=`date +"%Y-%m-%d %H:%M:%S"`
 
-rsync -vzrc $src  $user@$host:$des
+#rsync -vzrc ${SRC}  ${USER}@${HOST}:${des}
+
+scp -r ${SRC} ${HOST}:${des}
