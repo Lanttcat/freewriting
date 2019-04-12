@@ -22,14 +22,6 @@ const App = ({history}: IAppProps) => {
   return (
     <ConnectedRouter history={history}>
       {routes}
-      {/*<div className="App">*/}
-        {/*<Header/>*/}
-        {/*<div>*/}
-          {/*<Edit*/}
-            {/*limitTime={{isOpen: true, time: 5000}}*/}
-          {/*/>*/}
-        {/*</div>*/}
-      {/*</div>*/}
     </ConnectedRouter>
   );
 };
