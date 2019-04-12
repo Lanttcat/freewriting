@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import * as React from 'react';
 import Feedback from '../../components/Feedback';
 import Introduce from '../../components/Introduce';
-// import Card from '../../share/Card';
 import Edit from '../../containers/EditContainer';
 import styles from './Home.scss';
 

@@ -1,40 +1,32 @@
 import {routerMiddleware} from 'connected-react-router';
+import {createBrowserHistory} from 'history';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from "react-redux"
-import './index.css';
-import registerServiceWorker from './registerServiceWorker';
-
-import {createBrowserHistory} from 'history';
 import {applyMiddleware, compose, createStore} from 'redux'
 import App from './App'
+import {defaultConfig} from "./config/defaultConfig";
+import './index.css';
 import createRootReducer from './reducers/reducers';
-import {getUserConfig} from "./util/storageUserConfig";
+import registerServiceWorker from './registerServiceWorker';
+import {getUserConfig, recordUserUser} from "./util/storageUserConfig";
 
-
-const localUserConfig = getUserConfig();
-console.log(localUserConfig);
+const initialState = { configReducer: getUserConfig() || defaultConfig };
 const history = createBrowserHistory();
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const initialState = {
-  configReducer: localUserConfig || {
-    clearWordsTime: 5,
-    minWordNumber: 500,
-    minWriteTime: 600,
-    writeModel: 'number',
-  }
-};
 const store = createStore(
-  createRootReducer(history), // root reducer with router state
+  createRootReducer(history),
   initialState,
   composeEnhancer(
     applyMiddleware(
-      routerMiddleware(history), // for dispatching history actions
+      routerMiddleware(history),
       // ... other middlewares ...
     ),
   ),
 );
+
+initWebSite();
 
 ReactDOM.render(
   (
@@ -47,3 +39,7 @@ ReactDOM.render(
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
+
+function initWebSite() {
+  recordUserUser();
+}
