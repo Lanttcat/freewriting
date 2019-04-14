@@ -53,6 +53,10 @@ jobs:
       enabled: true
     working_directory: ~/repo
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "c4:48:25:f5:ab:9d:f5:c0:65:8d:54:06:fd:37:c6:9a"
+
       - run: echo "====================部署开始=============================="
       - attach_workspace:
           at: ~/repo
