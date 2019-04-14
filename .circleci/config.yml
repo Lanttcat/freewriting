@@ -55,7 +55,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "ad:94:f2:7e:1c:d3:dd:06:e9:ba:61:6c:0f:75:df:6e
+            - "ad:94:f2:7e:1c:d3:dd:06:e9:ba:61:6c:0f:75:df:6e"
 
       - run: echo "====================部署开始=============================="
       - attach_workspace:
