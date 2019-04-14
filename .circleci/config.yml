@@ -66,9 +66,6 @@ jobs:
       - run: pwd && ls -al
       - run: pwd && ls ./build
       - run: chmod 777 .circleci/deploy-master.sh
-      - run:
-          name: Deploy Over SSH
-          command: ./.circleci/deploy-master.sh
       - run: scp -r -P $MY_PORT ./build/ $HOST:~/test/
       - run: echo "====================部署完毕=============================="
 
