@@ -67,7 +67,7 @@ jobs:
       - run: pwd && ls ./build
       - run: sudo apt-get install sshpass
       - run: ssh-add -l
-      - run: sshpass -p $PWD scp -r -o "StrictHostKeyChecking=no"  ./build/ $REMOTE_NAME@$REMOTE_HOST:/root/test/
+      - run: sudo sshpass -p $PWD scp -r -o "StrictHostKeyChecking=no"  ./build/ $REMOTE_NAME@$REMOTE_HOST:/root/test/
       - run: echo "====================部署完毕=============================="
 
 workflows:
