@@ -68,7 +68,7 @@ jobs:
       - run: pwd && ls ./build
       - run: sudo apt-get install sshpass
       - run: ssh-add -l
-      - run: sudo sshpass -p $SSHPASS scp -r -o "StrictHostKeyChecking=no"  ./build/ $REMOTE_NAME@$REMOTE_HOST:/root/test/
+      - run: sudo sshpass -p $SSHPASS scp -r -o "StrictHostKeyChecking=no"  ./build/* $REMOTE_NAME@$REMOTE_HOST:/mysite/freewrite/
       - run: echo "====================部署完毕=============================="
 
 workflows:
@@ -81,4 +81,5 @@ workflows:
             - build
           filters:
             branches:
-              only: /release-.*/
+              only: master
+#              only: /release-.*/
