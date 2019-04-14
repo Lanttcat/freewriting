@@ -62,6 +62,7 @@ jobs:
           at: ~/repo
       - run: echo 'export REMOTE_HOST="$REMOTE_HOST"' >> $BASH_ENV
       - run: echo 'export REMOTE_NAME="$REMOTE_NAME"' >> $BASH_ENV
+      - run: echo 'export SSHPASS="$SSHPASS"' >> $BASH_ENV
       - run: source $BASH_ENV
       - run: pwd && ls -al
       - run: pwd && ls ./build
