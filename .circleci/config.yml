@@ -65,7 +65,7 @@ jobs:
       - run: source $BASH_ENV
       - run: pwd && ls -al
       - run: pwd && ls ./build
-      - run: scp -r  ./build/ $HOST:$MY_PORT/root/test/
+      - run: scp -r  ./build/ $HOST/root/test/
       - run: echo "====================部署完毕=============================="
 
 workflows:
