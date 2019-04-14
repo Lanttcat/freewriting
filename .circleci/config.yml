@@ -65,8 +65,7 @@ jobs:
       - run: source $BASH_ENV
       - run: pwd && ls -al
       - run: pwd && ls ./build
-      - run: chmod 777 .circleci/deploy-master.sh
-      - run: scp -r -P $MY_PORT ./build/ $HOST:/root/test/
+      - run: scp -r  ./build/ $HOST:$MY_PORT/root/test/
       - run: echo "====================部署完毕=============================="
 
 workflows:
