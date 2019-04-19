@@ -2,9 +2,10 @@ import Popover from 'antd/lib/popover';
 // @ts-ignore
 import classNames from 'classnames/bind';
 import * as React from 'react';
-import Feedback from '../../components/Feedback';
+import Button from 'src/share/Button';
 import Introduce from '../../components/Introduce';
 import Edit from '../../containers/EditContainer';
+import About from "../About";
 import styles from './Home.scss';
 
 interface IOwnProps {
@@ -24,8 +25,8 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
     }
   }
 
-  public handleClick = () => {
-    this.props.push('/create-new')
+  public handleClick = (route: string) => {
+    this.props.push(route)
   };
 
   public render(): React.ReactNode {
@@ -37,6 +38,10 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
           <Edit />
         </div>
         <div className={cx('home-right-wrapper')}>
+          <div className={cx('item')}>
+            <About />
+            <Button>选择模式</Button>
+          </div>
           <div className={cx('item')}>
             <Popover
               overlayClassName={cx('pop-over')}
@@ -50,15 +55,7 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
           </div>
 
           <div className={cx('item')}>
-            <Popover
-              overlayClassName={cx('pop-over')}
-              content={<Feedback/>}
-              title={<div className={cx('pop-style')}>feedback 反馈</div>}
-              trigger="hover"
-              placement="leftTop"
-            >
-              <p className={cx('item')}>feedback 反馈</p>
-            </Popover>
+            <p className={cx('item')} onClick={() => this.handleClick('/feedback')}>feedback 反馈</p>
           </div>
         </div>
       </div>
