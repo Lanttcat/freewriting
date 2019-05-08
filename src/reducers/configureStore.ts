@@ -1,4 +1,4 @@
-import { IGlobalConfigAction } from '../type';
+import {IGlobalConfigAction} from '../type';
 
 
 export const configReducer = (state = {}, action: IGlobalConfigAction) => {
@@ -9,3 +9,13 @@ export const configReducer = (state = {}, action: IGlobalConfigAction) => {
       return state
   }
 };
+
+// export const useTimesReducer = (state = {}, action: IUseTimes) => {
+//   switch (action.type) {
+//     case 'USE_TIMES':
+//       return action.payload;
+//     default:
+//       return state
+//   }
+// };
+

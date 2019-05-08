@@ -10,3 +10,8 @@ export interface IGlobalConfigAction {
   type: string;
   payload: IGlobalConfig;
 }
+
+// export interface IUseTimes {
+//   type: string;
+//   payload: number;
+// }

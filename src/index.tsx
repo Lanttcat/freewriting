@@ -10,9 +10,13 @@ import {defaultConfig} from "./config/defaultConfig";
 import './index.css';
 import createRootReducer from './reducers/reducers';
 import registerServiceWorker from './registerServiceWorker';
-import {getUserConfig, recordUserUser} from "./util/storageUserConfig";
+import {getUserConfig, getUserUserTimes, recordUserTimes} from "./util/storageUserConfig";
 
-const initialState = { configReducer: getUserConfig() || defaultConfig };
+const initialState = {
+  configReducer: getUserConfig() || defaultConfig,
+  useTimes: getUserUserTimes()
+};
+console.log(initialState);
 const history = createBrowserHistory();
 const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -41,5 +45,5 @@ ReactDOM.render(
 registerServiceWorker();
 
 function initWebSite() {
-  recordUserUser();
+  recordUserTimes();
 }

@@ -17,9 +17,9 @@ export const getUserConfig = () => {
   }
 };
 
-const getUserUserTimes = () => localStorage.getItem('times');
+export const getUserUserTimes = () => localStorage.getItem('times') || 0;
 
-export const recordUserUser = () => {
+export const recordUserTimes = () => {
   const timesNumber = _.toNumber(getUserUserTimes()) || 0;
   localStorage.setItem(LOCAL_STORAGE_TIMES, _.toString(timesNumber + 1));
 };
