@@ -6,7 +6,7 @@ import Header from './containers/HeaderContainer';
 import Feedback from './containers/FeedbackContainer';
 
 const routes = (
-  <div>
+  <div className='main-wrapper'>
     <Header />
     <Switch>
       <Route exact path="/" component={Home} />
