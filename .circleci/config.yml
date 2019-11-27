@@ -23,7 +23,6 @@ jobs:
           name: Gatsby Build
           command: npm run build
     machine: true
-    working_directory: ~/gatsby-site
     steps:
       - run: |
           echo "$DOCKER_PASS" | docker login repo.treescale.com --username $DOCKER_USER --password-stdin
