@@ -26,7 +26,9 @@ jobs:
       - run: docker login repo.treescale.com --username $DOCKER_USER --password $DOCKER_PASS
 
       # build the application image
-      - run: docker build -t $DOCKER_USER/freewriting .
+      - run: docker build -t freewriting .
+
+      - run:  docker tag freewriting:latest repo.treescale.com/$DOCKER_USER/freewriting:latest
 
       # deploy the image
       - run: docker push repo.treescale.com/$DOCKER_USER/freewriting:latest
