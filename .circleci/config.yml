@@ -12,8 +12,7 @@ jobs:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
             # Fallback cache to be used
             - v1-npm-deps-
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+      - setup_remote_docker
       - run:
           name: Install Dependencies
           command: npm install
