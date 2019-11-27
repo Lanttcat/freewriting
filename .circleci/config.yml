@@ -12,6 +12,8 @@ jobs:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
             # Fallback cache to be used
             - v1-npm-deps-
+      - setup_remote_docker:   # (2)
+          docker_layer_caching: true # (3)
       - run:
           name: Install Dependencies
           command: npm install
@@ -22,9 +24,7 @@ jobs:
       - run:
           name: Gatsby Build
           command: npm run build
-      - run: |
-          echo "$DOCKER_PASS" | docker login repo.treescale.com --username $DOCKER_USER --password-stdin
-          # docker run -d --name db company/proprietary-db:1.2.3
+      - run: docker login repo.treescale.com --username $DOCKER_USER --password $DOCKER_PASS
 
       # build the application image
       - run: docker build -t $DOCKER_USER/freewriting .
