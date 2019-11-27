@@ -22,8 +22,6 @@ jobs:
       - run:
           name: Gatsby Build
           command: npm run build
-    machine: true
-    steps:
       - run: |
           echo "$DOCKER_PASS" | docker login repo.treescale.com --username $DOCKER_USER --password-stdin
           # docker run -d --name db company/proprietary-db:1.2.3
