@@ -1,11 +1,11 @@
 version: 2
- jobs:
-   build:
-     docker:
-       - image: circleci/node:10
-     working_directory: ~/gatsby-site
-     steps:
-       - checkout
+  jobs:
+    build:
+      docker:
+        - image: circleci/node:10
+      working_directory: ~/gatsby-site
+      steps:
+      - checkout
       - restore_cache:
           keys:
             # Find a cache corresponding to this specific package-lock.json
