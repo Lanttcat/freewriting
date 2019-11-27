@@ -22,7 +22,6 @@ jobs:
       - run:
           name: Gatsby Build
           command: npm run build
-  deploy:
     machine: true
     working_directory: ~/gatsby-site
     steps:
