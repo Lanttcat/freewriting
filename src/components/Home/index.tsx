@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import * as React from 'react';
 import Button from 'src/share/Button';
 import Introduce from '../../components/Introduce';
+import Side from '../../components/Side';
 import Edit from '../../containers/EditContainer';
 import About from "../About";
 import styles from './Home.scss';
@@ -15,6 +16,17 @@ interface IOwnProps {
 interface IOwnStates {
   historyList: null,
 }
+
+const links = [
+  {
+    href: '',
+    name: '首页',
+  },
+  {
+    href: '',
+    name: '关于',
+  },
+];
 
 const cx = classNames.bind(styles);
 class Home extends React.Component<IOwnProps, IOwnStates>{
@@ -33,7 +45,9 @@ class Home extends React.Component<IOwnProps, IOwnStates>{
     // const { historyList } = this.state;
     return (
       <div className={cx('home-wrapper')}>
-        <div className={cx('home-left-wrapper')}/>
+        <div className={cx('home-left-wrapper')}>
+          <Side links={links} />
+        </div>
         <div className={cx('home-content-wrapper')}>
           <Edit />
         </div>

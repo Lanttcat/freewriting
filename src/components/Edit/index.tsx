@@ -172,7 +172,6 @@ class Edit extends React.Component<IOwnProps, IOwnStates> {
       number: () => articleWordCount > config.minWordNumber,
       time: () => writeTime > config.minWriteTime,
     };
-    console.log(config);
     return handleFunc[config.writeModel]();
   };
 
