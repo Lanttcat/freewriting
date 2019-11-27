@@ -22,15 +22,15 @@ jobs:
       - run:
           name: Gatsby Build
           command: npm run build
-    machine: true
-    working_directory: ~/gatsby-site
-    steps:
-      - run: |
-          echo "$DOCKER_PASS" | docker login repo.treescale.com --username $DOCKER_USER --password-stdin
-          # docker run -d --name db company/proprietary-db:1.2.3
+      machine: true
+      working_directory: ~/gatsby-site
+      steps:
+        - run: |
+            echo "$DOCKER_PASS" | docker login repo.treescale.com --username $DOCKER_USER --password-stdin
+            # docker run -d --name db company/proprietary-db:1.2.3
 
-      # build the application image
-      - run: docker build -t $DOCKER_USER/freewriting .
+        # build the application image
+        - run: docker build -t $DOCKER_USER/freewriting .
 
-      # deploy the image
-      - run: docker push repo.treescale.com/$DOCKER_USER/freewriting:latest
+        # deploy the image
+        - run: docker push repo.treescale.com/$DOCKER_USER/freewriting:latest
