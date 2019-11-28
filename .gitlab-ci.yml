@@ -1,7 +1,6 @@
-image: node:latest
-
 stages:
   - build
+  - deploy
 
 cache:
   paths:
@@ -9,18 +8,21 @@ cache:
 
 install_dependencies:
   stage: build
+  image: node:latest
   script:
     - npm install
     - npm run build
-    - docker login registry.gitlab.com -u $USERNAME -p $PASSWORD
-    - docker build -t registry.gitlab.com/ingram_lan/freewriting .
-    - docker push registry.gitlab.com/ingram_lan/freewriting
+    
   # tags:
   #   - docker
 
 #   artifacts: paths:
 #       - node_modules/
 
-# testing_testing:
-#   stage: test
-#   script: npm test
+deploy to docker hub:
+  image: docker:latest
+  stage: deploy
+  script: 
+    - docker login registry.gitlab.com -u $USERNAME -p $PASSWORD
+    - docker build -t registry.gitlab.com/ingram_lan/freewriting .
+    - docker push registry.gitlab.com/ingram_lan/freewriting
