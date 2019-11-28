@@ -12,9 +12,10 @@ install_dependencies:
   script:
     - npm install
     - npm run build
+    - ls .
   artifacts:
     paths:
-      - ./publish/
+      - ./public/
     
   # tags:
   #   - docker
@@ -23,7 +24,7 @@ install_dependencies:
 #       - node_modules/
 
 deploy to docker hub:
-  image: docker:stable
+  image: docker:18.09
   stage: deploy
   script: 
     - ls .
