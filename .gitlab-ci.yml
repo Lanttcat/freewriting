@@ -12,6 +12,9 @@ install_dependencies:
   script:
     - npm install
     - npm run build
+  artifacts:
+    paths:
+      - ./publish/
     
   # tags:
   #   - docker
@@ -20,10 +23,10 @@ install_dependencies:
 #       - node_modules/
 
 deploy to docker hub:
-  image: docker:latest
+  image: docker:stable
   stage: deploy
   script: 
     - ls .
-    - docker login registry.gitlab.com
+    - $PASSWORD | docker login registry.gitlab.com --username $USERNAME --password-stdin
     - docker build -t registry.gitlab.com/ingram_lan/freewriting .
     - docker push registry.gitlab.com/ingram_lan/freewriting
