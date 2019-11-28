@@ -28,7 +28,7 @@ install_dependencies:
 #       - node_modules/
 
 deploy to docker hub:
-  image: docker:18.09.7-dind
+  image: docker:19.03.1
   stage: deploy
   script: 
     - ls .
