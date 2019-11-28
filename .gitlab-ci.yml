@@ -12,6 +12,9 @@ install_dependencies:
   script:
     - npm install
     - npm run build
+    - docker login registry.gitlab.com -u $USERNAME -p $PASSWORD
+    - docker build -t registry.gitlab.com/ingram_lan/freewriting .
+    - docker push registry.gitlab.com/ingram_lan/freewriting
   # tags:
   #   - docker
 
