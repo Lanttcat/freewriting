@@ -23,6 +23,7 @@ deploy to docker hub:
   image: docker:latest
   stage: deploy
   script: 
-    - docker login registry.gitlab.com -u $USERNAME -p $PASSWORD
+    - ls .
+    - docker login registry.gitlab.com
     - docker build -t registry.gitlab.com/ingram_lan/freewriting .
     - docker push registry.gitlab.com/ingram_lan/freewriting
